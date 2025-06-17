@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>コーヒーメニュー</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="menu-container">
+        <div class="menu-item">
+            <h2>HOT LATTE</h2>
+            <div class="options">
+                <div class="option">
+                    <div class="icon red"></div>
+                    <p>普通<br><span>REGULAR</span></p>
+                </div>
+                <div class="option">
+                    <div class="icon red"></div>
+                    <p>大きい<br><span>LARGE</span></p>
+                </div>
+            </div>
+        </div>
+        <div class="menu-item">
+            <h2>HOT COFFEE</h2>
+            <div class="options">
+                <div class="option">
+                    <div class="icon dark-red"></div>
+                    <p>普通<br><span>REGULAR</span></p>
+                </div>
+                <div class="option">
+                    <div class="icon dark-red"></div>
+                    <p>大きい<br><span>LARGE</span></p>
+                </div>
+            </div>
+        </div>
+        <div class="menu-item">
+            <h2>ICE LATTE</h2>
+            <div class="options">
+                <div class="option">
+                    <div class="icon blue"></div>
+                    <p>普通<br><span>REGULAR</span></p>
+                </div>
+                <div class="option">
+                    <div class="icon blue"></div>
+                    <p>大きい<br><span>LARGE</span></p>
+                </div>
+            </div>
+        </div>
+        <div class="menu-item">
+            <h2>ICE COFFEE</h2>
+            <div class="options">
+                <div class="option">
+                    <div class="icon dark-blue"></div>
+                    <p>普通<br><span>REGULAR</span></p>
+                </div>
+                <div class="option">
+                    <div class="icon dark-blue"></div>
+                    <p>大きい<br><span>LARGE</span></p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+    // すべての.icon要素にクリックイベントを追加
+    window.addEventListener('DOMContentLoaded', function() {
+      document.querySelectorAll('.icon').forEach(function(icon) {
+        icon.addEventListener('click', function() {
+          // 既存のclickedクラスを一度削除
+          icon.classList.remove('clicked');
+          // 強制再描画でアニメーションをリセット
+          void icon.offsetWidth;
+          icon.classList.add('clicked');
+          // 2秒後にクラスを削除
+          setTimeout(function() {
+            icon.classList.remove('clicked');
+          }, 2000);
+          // 文字にも同じようにエフェクト
+          const p = icon.nextElementSibling;
+          if (p) {
+            p.classList.remove('clicked-text');
+            void p.offsetWidth;
+            p.classList.add('clicked-text');
+            setTimeout(function() {
+              p.classList.remove('clicked-text');
+            }, 2000);
+          }
+          // h2にもエフェクト
+          let parent = icon.parentElement;
+          while (parent && !parent.classList.contains('menu-item')) {
+            parent = parent.parentElement;
+          }
+          if (parent) {
+            const h2 = parent.querySelector('h2');
+            if (h2) {
+              h2.classList.remove('clicked-text');
+              void h2.offsetWidth;
+              h2.classList.add('clicked-text');
+              setTimeout(function() {
+                h2.classList.remove('clicked-text');
+              }, 2000);
+            }
+          }
+        });
+      });
+    });
+    </script>
+</body>
+</html>
